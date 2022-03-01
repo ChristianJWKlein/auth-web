@@ -1,10 +1,23 @@
 import { useState } from 'react';
+import Signup from './scenes/Signup';
 
 function App() {
   const [token, setToken] = useState();
   const [isUser, setIsUser] = useState();
 
-  return <section>{!token ? <h1>Login</h1> : <h1>User List</h1>}</section>;
+  return (
+    <section>
+      {!token ? (
+        isUser ? (
+          <h1>Login</h1>
+        ) : (
+          <Signup setToken={setToken} setIsUser={setIsUser} />
+        )
+      ) : (
+        <h1>User List</h1>
+      )}
+    </section>
+  );
 }
 
 export default App;
