@@ -1,22 +1,26 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import bcrypt from 'bcryptjs'
+
+const salt = '$2b$10$ycjXXoH/cHU8hqxe0CyBPu'
 
 export default function Signup({ setToken, setIsUser }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    const hashedPassword = bcrypt.hashSync(password, salt)
     fetch('http://localhost:3001/users', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password: hashedPassword })
     })
       .then((res) => res.json())
       .then((data) => setToken(data.token))
-      .catch((err) => alert(err));
-  };
+      .catch((err) => alert(err))
+  }
 
   return (
     <>
@@ -45,5 +49,5 @@ export default function Signup({ setToken, setIsUser }) {
       <br />
       <button onClick={() => setIsUser(true)}>Login</button>
     </>
-  );
+  )
 }
