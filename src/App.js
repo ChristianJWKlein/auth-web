@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Login from './scenes/Login';
 import Signup from './scenes/Signup';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <section>
       {!token ? (
         isUser ? (
-          <h1>Login</h1>
+          <Login setToken={setToken} setIsUser={setIsUser} />
         ) : (
           <Signup setToken={setToken} setIsUser={setIsUser} />
         )

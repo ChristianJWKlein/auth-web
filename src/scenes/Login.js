@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export default function Signup({ setToken, setIsUser }) {
+export default function Login({ setToken, setIsUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/users', {
+    fetch('http://localhost:3001/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export default function Signup({ setToken, setIsUser }) {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email:{' '}
@@ -40,10 +40,10 @@ export default function Signup({ setToken, setIsUser }) {
           />
         </label>
         <br />
-        <input type='submit' value='Sign Up' />
+        <input type='submit' value='Login' />
       </form>
       <br />
-      <button onClick={() => setIsUser(true)}>Login</button>
+      <button onClick={() => setIsUser(false)}>Sign Up</button>
     </>
   );
 }
